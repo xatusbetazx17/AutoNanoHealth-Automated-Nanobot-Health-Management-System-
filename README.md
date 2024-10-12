@@ -35,7 +35,36 @@ This project is licensed under the [MIT License](LICENSE), allowing for modifica
 
 **Contributions are welcome!** Please feel free to submit issues or pull requests to help improve the project.
 
+## Step 1: System Setup
+Ensure your environment has Python 3, Blender, and ROS installed.
+Clone your repository to a local folder.
 
+## Step 2: Run Installation Script
+
+Open a terminal and run the Python script that installs all the dependencies and sets up the environment.
+
+bash
+```
+python nanobot_setup.py
+```
+## Step 3: Test the Virtual Environment
+After running the setup, ensure that the virtual environment (nanobot_env) is activated and all dependencies are installed.
+
+## Step 4: Add Patient Data and Test Workflow
+Enter sample patient data when prompted during the execution of the script.
+Verify that the patient data is properly stored in the database.
+
+## Step 5: Test Disease Investigation and Cure Development
+The script includes a step where nanobots simulate disease investigation and cure development.
+You can modify and re-run this part to simulate new conditions and cures.
+
+## Step 6: ROS and Blender Integration Testing
+Run Blender and ROS in the background to ensure that the integration functions properly.
+Test the ROS publisher/subscriber to verify the nanobots' communication and movements.
+
+## Step 7: Testing Data Sharing with Medical Institutions
+Modify the provided API endpoint (https://hospital-medical-database.example.com/update) to point to a real or mock endpoint.
+Ensure the sharing of disease and cure data works by checking responses.
 
 
 ## Nanobot Comtrol System
