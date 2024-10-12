@@ -46,6 +46,7 @@ import os
 import subprocess
 import sys
 import time
+import platform
 
 # Utility Functions
 
@@ -66,12 +67,30 @@ def install_system_dependencies():
     Install system dependencies for ROS, Blender, Python, and Gazebo.
     """
     print("Installing system dependencies...")
-    run_command("sudo apt update")
-    run_command("sudo apt install -y curl wget build-essential python3-pip python3-venv")
-    run_command("sudo apt install -y ros-noetic-desktop-full")
-    run_command("sudo apt install -y ros-noetic-gazebo-ros")
-    run_command("sudo apt install -y blender")
-    run_command("sudo apt install -y python3-rospy")
+    system_os = platform.system()
+    if system_os == "Linux":
+        distro = platform.linux_distribution()[0].lower() if hasattr(platform, 'linux_distribution') else ""
+        if "ubuntu" in distro or "debian" in distro:
+            run_command("sudo apt-get update && sudo apt-get install -y curl wget build-essential python3-pip python3-venv")
+            run_command("sudo apt-get install -y ros-noetic-desktop-full ros-noetic-gazebo-ros blender python3-rospy")
+        elif "fedora" in distro or "centos" in distro:
+            run_command("sudo yum install -y curl wget make python3-pip")
+            # Additional Fedora/CentOS-specific installation for ROS/Blender if available
+        elif "arch" in distro:
+            run_command("sudo pacman -Syu --noconfirm curl wget base-devel python-pip blender")
+            # ROS installation on Arch may require AUR helpers (manual installation needed)
+    elif system_os == "Darwin":  # macOS
+        run_command("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
+        run_command("brew install python3 wget blender")
+        # ROS installation on macOS
+        run_command("brew install roswell")  # Note: ROS on macOS is more complicated and may require additional steps
+    elif system_os == "Windows":
+        run_command("powershell -Command \"Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))\"")
+        run_command("choco install python blender")
+        # ROS on Windows requires manual installation of ROS 2
+    else:
+        print(f"Unsupported operating system: {system_os}")
+        sys.exit(1)
 
 # Step 2: Setup Python Environment
 
@@ -106,12 +125,11 @@ def setup_ros_environment():
     Install and configure ROS to support the nanobot control system.
     """
     print("Setting up ROS environment...")
-    run_command("source /opt/ros/noetic/setup.bash")
     ros_workspace = os.path.expanduser("~/catkin_ws")
     if not os.path.exists(ros_workspace):
         os.makedirs(ros_workspace + "/src")
     run_command(f"cd {ros_workspace} && catkin_make")
-    run_command(f"source {ros_workspace}/devel/setup.bash")
+    run_command(f"source /opt/ros/noetic/setup.bash && source {ros_workspace}/devel/setup.bash")
 
 # Step 5: Install Required ROS Packages
 
@@ -120,7 +138,7 @@ def install_ros_packages():
     Install the necessary ROS packages to manage the communication and control of nanobots.
     """
     print("Installing ROS packages...")
-    run_command("sudo apt install -y ros-noetic-geometry-msgs ros-noetic-std-msgs ros-noetic-rviz")
+    run_command("sudo apt-get install -y ros-noetic-geometry-msgs ros-noetic-std-msgs ros-noetic-rviz")
 
 # Step 6: Create and Initialize Database for Patient Conditions
 
