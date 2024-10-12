@@ -8,6 +8,36 @@ A comprehensive nanobot control system for medical applications, integrating ROS
 # This script handles the installation of all required dependencies and sets up an environment for medical nanobot simulations.
 # It also integrates with Blender, ROS, and custom Python environments to allow automated treatment decisions based on patient data.
 
+
+# AutoNanoHealth - Automated Nanobot Health Management System
+
+**AutoNanoHealth** is an open-source system designed to simulate and manage medical nanobots for automated health applications. This system integrates **ROS**, **Blender**, and **Python** to automate treatment, detect diseases, and simulate nanobot behavior within the human body. It allows for:
+
+- **Automated Dependency Setup**: Installs ROS, Blender, and Python libraries automatically.
+- **Patient Data Management**: Stores patient conditions in a database with automated treatment assignment.
+- **Blender & ROS Integration**: Visualizes nanobot movements and controls in real-time.
+
+This project aims to provide a foundation for the development of advanced **nanobot-based health solutions**, allowing medical research, testing, and the potential for real-world applications.
+
+## Features
+- **Automated Installation** of required dependencies and setup of ROS and Blender environments.
+- **Disease Detection**: Identifies and reports specific disease markers and assigns treatments.
+- **Patient Database Management**: Collects patient data, manages multiple conditions, and assigns treatment plans.
+- **Blender Visualization**: Simulates nanobot movement in a 3D environment.
+- **ROS Integration**: Enables real-time communication for controlling nanobots.
+
+Feel free to contribute and enhance the functionality!
+
+## License
+This project is licensed under the [MIT License](LICENSE), allowing for modification and redistribution.
+
+---
+
+**Contributions are welcome!** Please feel free to submit issues or pull requests to help improve the project.
+
+
+
+
 ## Nanobot Comtrol System
 
 Bash
